@@ -1,0 +1,32 @@
+databases:
+  - name: nuestro_amor_db
+    databaseName: nuestro_amor
+    user: nuestro_amor
+    plan: free
+
+services:
+  - type: web
+    name: nuestro_amor
+    runtime: python
+    plan: free
+    buildCommand: ./build.sh
+    startCommand: gunicorn nuestro_amor.wsgi:application
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: nuestro_amor_db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DJANGO_SUPERUSER_USERNAME
+        sync: false
+      - key: DJANGO_SUPERUSER_EMAIL
+        sync: false
+      - key: DJANGO_SUPERUSER_PASSWORD
+        sync: false
+      - key: PYTHON_VERSION
+        value: 3.11.4
+      - key: DEBUG
+        value: false
+      - key: ALLOWED_HOSTS
+        value: .onrender.com
