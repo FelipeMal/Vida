@@ -2,6 +2,8 @@
 # exit on error
 set -o errexit
 
+chmod +x build.sh
+
 pip install -r requirements.txt
 
 python manage.py collectstatic --no-input
