@@ -9,8 +9,8 @@ services:
     name: nuestro_amor
     runtime: python
     plan: free
-    buildCommand: ./build.sh
-    startCommand: gunicorn nuestro_amor.wsgi:application --bind 0.0.0.0:8000
+    buildCommand: bash ./build.sh
+    startCommand: gunicorn nuestro_amor.wsgi:application
     envVars:
       - key: DATABASE_URL
         fromDatabase:
